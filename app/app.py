@@ -8,30 +8,42 @@ app = Flask(__name__)
 
 
 @app.get("/users")
-def users() -> ResponseReturnValue:
+def get_users() -> ResponseReturnValue:
     controller = usersController()
     body = {"ping_id": 200, "ping_message": controller.read_users()}
     return body
 
 @app.get("/users/<int:user_id>")
-def users_id(user_id:int) -> ResponseReturnValue:
+def get_users_id(user_id:int) -> ResponseReturnValue:
     controller = usersController()
     body = controller.read_users(user_id)
     return body
 
 @app.post("/users")
-def add_user() -> ResponseReturnValue:
+def post_user() -> ResponseReturnValue:
     controller = usersController()
     user = request.json
     controller.add_user(user) 
 
 @app.patch("/users/<int:user_id>")
-def add_user(user_id:int) -> ResponseReturnValue:
+def patch_user(user_id:int) -> ResponseReturnValue:
     controller = usersController()
     user = request.json
     if user["lastname"] == None or user["name"] == None:
         return "", 400
     controller.edit_user(user,user_id) 
+
+@app.put("/users/<int:user_id>")
+def put_user(user_id:int) -> ResponseReturnValue:
+    controller = usersController()
+    user = request.json
+    controller.put_user(user,user_id)
+
+@app.delete("/users/<int:user_id>")
+def put_user(user_id:int) -> ResponseReturnValue:
+    controller = usersController()
+    user = request.json
+    controller.delete_user(user,user_id)
 
 if __name__ == '__main__':
     app.run()

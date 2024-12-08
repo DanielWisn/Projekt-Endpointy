@@ -1,5 +1,6 @@
 [
   { "name": "Wojciech", "lastname": "Oczkowski", "id": 0 },
-  { "name": "Ilia", "lastname": "Naistethik", "id": 1 },
-  { "name": "Adam", "lastname": "Taneczek", "id": 2 }
+  { "name": "Mateusz", "lastname": "Kozlowski", "id": 1 },
+  { "name": "Adam", "lastname": "Taneczek", "id": 2 },
+  { "name": "Kuba", "lastname": "Sawulski", "id": 3 }
 ]
