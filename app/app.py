@@ -25,5 +25,13 @@ def add_user() -> ResponseReturnValue:
     user = request.json
     controller.add_user(user) 
 
+@app.patch("/users/<int:user_id>")
+def add_user(user_id:int) -> ResponseReturnValue:
+    controller = usersController()
+    user = request.json
+    if user["lastname"] == None or user["name"] == None:
+        return "", 400
+    controller.edit_user(user,user_id) 
+
 if __name__ == '__main__':
     app.run()

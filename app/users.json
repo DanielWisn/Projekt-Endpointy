@@ -1,5 +1,5 @@
 [
-    { "id": 0, "name": "Wojciech", "lastname": "Oczkowski" },
-    { "id": 1, "name": "Ilia", "lastname": "Naistethik" }
-  ]
-  
+  { "name": "Wojciech", "lastname": "Oczkowski", "id": 0 },
+  { "name": "Ilia", "lastname": "Naistethik", "id": 1 },
+  { "name": "Adam", "lastname": "Taneczek", "id": 2 }
+]
