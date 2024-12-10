@@ -1,8 +1,7 @@
 from flask import Flask
-from flask import jsonify
 from flask import request
 from flask.typing import ResponseReturnValue
-from controllers import usersController
+from app.controllers import usersController
 
 app = Flask(__name__)
 
@@ -10,7 +9,7 @@ app = Flask(__name__)
 @app.get("/users")
 def get_users() -> ResponseReturnValue:
     controller = usersController()
-    body = {"ping_id": 200, "ping_message": controller.read_users()}
+    body = controller.read_users()
     return body
 
 @app.get("/users/<int:user_id>")
@@ -40,7 +39,7 @@ def put_user(user_id:int) -> ResponseReturnValue:
     controller.put_user(user,user_id)
 
 @app.delete("/users/<int:user_id>")
-def put_user(user_id:int) -> ResponseReturnValue:
+def delete_user(user_id:int) -> ResponseReturnValue:
     controller = usersController()
     user = request.json
     controller.delete_user(user,user_id)

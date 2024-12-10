@@ -1,6 +1,1 @@
-[
-  { "name": "Wojciech", "lastname": "Oczkowski", "id": 0 },
-  { "name": "Mateusz", "lastname": "Kozlowski", "id": 1 },
-  { "name": "Adam", "lastname": "Taneczek", "id": 2 },
-  { "name": "Kuba", "lastname": "Sawulski", "id": 3 }
-]
+[{"name": "Wojciech", "lastname": "Oczkowski", "id": 0}, {"name": "Mateusz", "lastname": "Kozlowski", "id": 1}, {"name": "Adam", "lastname": "Taneczek", "id": 2}, {"name": "Kuba", "lastname": "Sawulski", "id": 3}, {"lastname": "Gorczyca", "name": "Tymon", "id": 4}]
