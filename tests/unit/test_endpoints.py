@@ -1,24 +1,31 @@
-from app.app import app
-from app import get_users,get_users_id,post_user,patch_user,put_user,delete_user
-from flask import Flask
-import pytest
+from app import usersController
 
-@pytest.fixture
-def client():
-    with app.test_client() as client:
-        yield client
+def test_read_users():
+    assert usersController.read_users()[1] == 200
 
-def test_flask_app_exists() -> None:
-    assert isinstance(app,Flask)
+def test_read_users_id():
+    assert usersController.read_users(1)[1] == 200
 
-def test_get_users() -> None:
-    with app.test_request_context():
-        assert get_users()[1] == 200
+def test_add_user():
+    assert usersController.add_user({"name":"Bartosz","lastname":"Cudny"})[1] == 201
 
-def test_get_users_id() -> None:
-    with app.test_request_context():
-        assert get_users_id(2)[1] == 200
+def test_edit_user():
+    assert usersController.edit_user({"name":"Bartosz","lastname":"Cudny"},4)[1] == 204
 
-def test_post_user(client) -> None:
-    response = client.post("/users", json={"name":"Tymon","lastname":"Gorczyca"})
-    assert response.status_code == 201
+def test_edit_user_error_id():
+    assert usersController.edit_user({"name":"Bartosz","lastname":"Cudny"},200)[1] == 400
+
+def test_edit_user_error_body():
+    assert usersController.edit_user({"error":"error"},2)[1] == 400
+
+def test_put_user():
+    assert usersController.put_user({"name":"Antoni","lastname":"Kmuk"},6)[1] == 204
+
+def test_put_user_edit():
+    assert usersController.put_user({"name":"Antoni","lastname":"Kmuk"},5)[1] == 204
+
+def test_delete_user():
+    assert usersController.delete_user(6)[1] == 204
+
+def test_delete_user_error():
+    assert usersController.delete_user(8)[1] == 400

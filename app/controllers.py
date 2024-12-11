@@ -26,7 +26,7 @@ class usersController:
         return "", 201
     @staticmethod
     def edit_user(user:dict,user_id:int):
-        with open('.app/users.json','r') as f:
+        with open('./app/users.json','r') as f:
             users = json.load(f)
         id_in_users = False
         for i in range(len(users)):
@@ -36,10 +36,14 @@ class usersController:
                 break
         if id_in_users == False:
             return "", 400
-        users[edit_user_id]["name"] = user["name"]
-        users[edit_user_id]["lastname"] = user["lastname"]
-        with open('./app/users.json','w') as f:
-            json.dump(users,f)
+        try:
+            users[edit_user_id]["name"] = user["name"]
+            users[edit_user_id]["lastname"] = user["lastname"]
+            with open('./app/users.json','w') as f:
+                json.dump(users,f)
+            return "", 204
+        except:
+            return "",400
     @staticmethod
     def put_user(user:dict,user_id:int):
         with open('./app/users.json','r') as f:
@@ -77,7 +81,8 @@ class usersController:
             users.pop(delete_user_id)
             with open('./app/users.json','w') as f:
                 json.dump(users,f)
-
+            return "", 204
+        
 if __name__ == "__main__":
     controller = usersController()
     # controller.add_user({"name": "Kuba", "lastname": "Sawulski"})

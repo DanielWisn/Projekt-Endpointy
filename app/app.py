@@ -22,7 +22,7 @@ def get_users_id(user_id:int) -> ResponseReturnValue:
 def post_user() -> ResponseReturnValue:
     controller = usersController()
     user = request.json
-    controller.add_user(user) 
+    return controller.add_user(user) 
 
 @app.patch("/users/<int:user_id>")
 def patch_user(user_id:int) -> ResponseReturnValue:
@@ -36,13 +36,12 @@ def patch_user(user_id:int) -> ResponseReturnValue:
 def put_user(user_id:int) -> ResponseReturnValue:
     controller = usersController()
     user = request.json
-    controller.put_user(user,user_id)
+    return controller.put_user(user,user_id)
 
 @app.delete("/users/<int:user_id>")
 def delete_user(user_id:int) -> ResponseReturnValue:
     controller = usersController()
-    user = request.json
-    controller.delete_user(user,user_id)
+    controller.delete_user(user_id)
 
 if __name__ == '__main__':
     app.run()
