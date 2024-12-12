@@ -4,7 +4,7 @@ class usersController:
     @staticmethod
     def read_users(user_id:int=None) -> dict:
         with open('./app/users.json','r') as f:
-            users = json.load(f)
+            users = sorted(json.load(f), key=lambda x: x["id"])
         if user_id != None:
             for i in range(len(users)):
                 if  users[i]["id"] == user_id:
@@ -13,7 +13,7 @@ class usersController:
     @staticmethod
     def add_user(user:dict):
         with open('./app/users.json','r') as f:
-            users = json.load(f)
+            users = sorted(json.load(f), key=lambda x: x["id"])
         new_id = len(users)
         for i in range(len(users)-1):
             if (users[i]["id"] + 1) != (users[i+1]["id"]):
@@ -26,8 +26,13 @@ class usersController:
         return "", 201
     @staticmethod
     def edit_user(user:dict,user_id:int):
+        try:
+            if user["lastname"] == None or user["name"] == None:
+                return "", 400
+        except:
+            return "",400
         with open('./app/users.json','r') as f:
-            users = json.load(f)
+            users = sorted(json.load(f), key=lambda x: x["id"])
         id_in_users = False
         for i in range(len(users)):
             if users[i]["id"] == user_id:
@@ -47,7 +52,7 @@ class usersController:
     @staticmethod
     def put_user(user:dict,user_id:int):
         with open('./app/users.json','r') as f:
-            users = json.load(f)
+            users = sorted(json.load(f), key=lambda x: x["id"])
         id_in_users = False
         for i in range(len(users)):
             if users[i]["id"] == user_id:
@@ -68,7 +73,7 @@ class usersController:
     @staticmethod
     def delete_user(user_id:int):
         with open('./app/users.json','r') as f:
-            users = json.load(f)
+            users = sorted(json.load(f), key=lambda x: x["id"])
         id_in_users = False
         for i in range(len(users)):
             if users[i]["id"] == user_id:
@@ -82,10 +87,3 @@ class usersController:
             with open('./app/users.json','w') as f:
                 json.dump(users,f)
             return "", 204
-        
-if __name__ == "__main__":
-    controller = usersController()
-    # controller.add_user({"name": "Kuba", "lastname": "Sawulski"})
-    # controller.edit_user({"name": "Adam", "lastname": "Taneczek"},2)
-    # controller.put_user({"name": "Mateusz", "lastname": "Kozlowski"},1)
-    # controller.delete_user(3)

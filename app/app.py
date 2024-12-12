@@ -28,9 +28,7 @@ def post_user() -> ResponseReturnValue:
 def patch_user(user_id:int) -> ResponseReturnValue:
     controller = usersController()
     user = request.json
-    if user["lastname"] == None or user["name"] == None:
-        return "", 400
-    controller.edit_user(user,user_id) 
+    return controller.edit_user(user,user_id) 
 
 @app.put("/users/<int:user_id>")
 def put_user(user_id:int) -> ResponseReturnValue:
@@ -41,7 +39,7 @@ def put_user(user_id:int) -> ResponseReturnValue:
 @app.delete("/users/<int:user_id>")
 def delete_user(user_id:int) -> ResponseReturnValue:
     controller = usersController()
-    controller.delete_user(user_id)
+    return controller.delete_user(user_id)
 
 if __name__ == '__main__':
     app.run()

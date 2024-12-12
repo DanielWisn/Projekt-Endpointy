@@ -22,3 +22,27 @@ def test_get_users_id() -> None:
 def test_post_user(client) -> None:
     response = client.post("/users", json={"name":"Tymon","lastname":"Gorczyca"})
     assert response.status_code == 201
+
+def test_patch_user(client) -> None:
+    response = client.patch("/users/2", json={"name":"Jan","lastname":"Gawlak"})
+    assert response.status_code == 204
+
+def test_patch_user_error_id(client) -> None:
+    response = client.patch("/users/200", json={"name":"Jan","lastname":"Gawlak"})
+    assert response.status_code == 400
+
+def test_patch_user_error_body(client) -> None:
+    response = client.patch("/users/2", json={"error":"error","error":"error"})
+    assert response.status_code == 400
+
+def test_put_user(client) -> None:
+    response = client.put("/users/3", json={"name":"Dawid","lastname":"Markiewicz"})
+    assert response.status_code == 204
+
+def test_delete_user(client) -> None:
+    response = client.delete("/users/1", json={"name":"Dawid","lastname":"Markiewicz"})
+    assert response.status_code == 204
+
+def test_delete_user_error(client) -> None:
+    response = client.delete("/users/200")
+    assert response.status_code == 400
